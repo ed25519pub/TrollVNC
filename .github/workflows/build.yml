@@ -108,6 +108,9 @@ jobs:
         with:
           xcode-version: "16.2"
 
+      - name: Install iOS platform
+        run: xcodebuild -downloadPlatform iOS -buildVersion 18.2
+
       - name: Generate Managed.plist (managed build)
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.is_managed == true }}
         env:
