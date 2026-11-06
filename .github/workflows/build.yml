@@ -73,8 +73,9 @@ jobs:
     runs-on: macos-15
 
     strategy:
+      # Dopamine on iOS 17 requires the rootless package only.
       matrix:
-        scheme: ["default", "rootless", "roothide", "bootstrap"]
+        scheme: ["rootless"]
 
     steps:
       - name: Checkout repository
@@ -107,9 +108,6 @@ jobs:
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: "16.2"
-
-      - name: Install iOS platform
-        run: xcodebuild -downloadPlatform iOS -buildVersion 18.2
 
       - name: Generate Managed.plist (managed build)
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.is_managed == true }}
